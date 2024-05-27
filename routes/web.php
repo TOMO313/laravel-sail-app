@@ -19,7 +19,8 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/posts/index', [PostController::class, 'index']);
+Route::get('/posts/index', [PostController::class, 'index'])->name('index');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
