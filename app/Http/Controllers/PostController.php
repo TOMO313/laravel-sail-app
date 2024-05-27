@@ -13,4 +13,9 @@ class PostController extends Controller
         $posts = Post::all();
         return inertia("Post/Index", ["posts"=>$posts]);
     }
+    
+    public function show(Post $post)
+    {
+        return inertia("Post/Show", ["post"=>$post]);
+    }
 }
