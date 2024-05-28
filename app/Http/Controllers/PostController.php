@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Inertia\Inertia;
+use Redirect;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -23,7 +25,7 @@ class PostController extends Controller
         return inertia("Post/Create");
     }
 
-    public function store(Request $request, Post $post)
+    public function store(PostRequest $request, Post $post)
     {
         $input = $request->all();
         $post->fill($input)->save();
