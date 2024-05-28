@@ -14,13 +14,14 @@
        </template>
        <div class="w-3/4 mx-auto mt-8 space-y-3">
            <h1 class="font-bold text-3xl text-gray-800">Blog Name</h1>
-           <div class="w-1/2 mx-auto divide-gray-200 divide-y-2"></div>
+           <div class="w-1/2 mx-auto divide-gray-200 divide-y-2">
                <div v-for="post in posts" class="space-y-1">
                    <h2 class="font-bold text-xl text-gray-800">
                     <Link :href="route('show', {id: post.id})">{{ post.title }}</Link>
                    </h2>
                    <p class="p-2">{{ post.body }}</p>
                </div>
-       </div>
+            </div>    
+        </div>
     </Authenticated>
 </template>
