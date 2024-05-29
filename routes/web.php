@@ -22,7 +22,9 @@ Route::get('/dashboard', function () {
 Route::get('/posts/index', [PostController::class, 'index'])->name('index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('create');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('edit');
 Route::post('/posts', [PostController::class, 'store'])->name('store');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
