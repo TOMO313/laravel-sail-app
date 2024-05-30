@@ -1,9 +1,11 @@
 <?php
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -12,15 +14,24 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/posts/index', [PostController::class, 'index'])->name('index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('create');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('show');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('edit');
-Route::post('/posts', [PostController::class, 'store'])->name('store');
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('update');
+
+Route::group([
+    'controller' => PostController::class,
+    'prefix' => "posts",
+    ], function()
+{
+    Route::get('index', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::get('{post}', 'show')->name('show');
+    Route::get('{post}/edit', 'edit')->name('edit');
+    Route::post('store', 'store')->name('store');
+    Route::put('{post}', 'update')->name('update');
+    Route::delete('{post}', 'delete')->name('delete');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

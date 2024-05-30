@@ -1,10 +1,15 @@
 <script setup>
    import Authenticated from '@/Layouts/AuthenticatedLayout.vue';
-   import { Link } from '@inertiajs/vue3';
+   import { Link, router } from '@inertiajs/vue3';
    const {posts} =defineProps({
     posts: Array
-   });
-</script>
+   })
+   const destroy = ({id})=>{
+    router.delete(route('delete', {id: id}), {
+        onBefore: () => confirm('削除しますが、よろしですか？')
+    })
+   }
+   </script>
 <template>
     <Authenticated>
        <template #header>
@@ -19,7 +24,11 @@
                    <h2 class="font-bold text-xl text-gray-800">
                     <Link :href="route('show', {id: post.id})">{{ post.title }}</Link>
                    </h2>
+                   <button class="px-3 bg-purple-300 hover:bg-purple-400 rounded-md" @click="destroy(post)">
+                    削除 
+                   </button>
                    <p class="p-2">{{ post.body }}</p>
+                   <small>カテゴリー:{{ post.category?.name }}</small>
                </div>
             </div>    
         </div>

@@ -3,7 +3,7 @@
     import { Link } from '@inertiajs/vue3';
     const {post} = defineProps({
         post: Object
-    });
+    })
 </script>
 <template>
     <Authenticated>
@@ -20,6 +20,9 @@
                 <div>
                     <h3>本文</h3>
                     <h3>{{ post.body }}</h3>
+                </div>
+                <div>
+                    <p>カテゴリー:{{ post.category.name }}</p>
                 </div>
                 <div class="space-x-3">
                     <Link :href="route('edit', {id: post.id})">Edit</Link>
