@@ -21,7 +21,8 @@
                     <h3>本文</h3>
                     <h3>{{ post.body }}</h3>
                 </div>
-                <div>
+                <div class="space-x-3">
+                    <Link :href="route('edit', {id: post.id})">Edit</Link>
                     <Link :href="route('index')">戻る</Link>
                 </div>
             </div>

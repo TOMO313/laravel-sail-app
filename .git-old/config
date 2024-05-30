@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:TOMO313/sail-app.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
