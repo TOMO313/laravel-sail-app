@@ -1,9 +1,13 @@
 <script setup>
     import Authenticated from '@/Layouts/AuthenticatedLayout.vue';
     import { useForm } from '@inertiajs/vue3';
+    const {categories} = defineProps({
+        categories: Array
+    })
     const form = useForm({
         title: "",
         body: "",
+        category_id: categories[0].id
     })
 </script>
 <template>
@@ -25,6 +29,14 @@
                     <input type="text" v-model="form.body" id="body" class="w-full"/>
                     <div class="text-red-700" v-if="form.errors.body">{{ form.errors.body }}</div>
                 </div>
+                <div  class="m-5">
+                    <label for="category">カテゴリー</label>
+                    <select v-model="form.category_id" id="category" class="w-full">
+                        <option v-for="category in categories" :value="category.id">
+                            {{ category.name }}
+                        </option>
+                    </select>
+                </div> 
                 <button class="ml-auto border-2 border-gray-200 bg-cyan-100 px-2 flex" type="submit" :disabled="form.processing">
                     Create
                 </button>
